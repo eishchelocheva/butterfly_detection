@@ -1,0 +1,95 @@
+{
+  "purpose": "Instruction illustrations, not exam or golden-set labels",
+  "human_verification": "pending",
+  "examples": [
+    {
+      "photo_id": "763066661",
+      "title": "Бабочек нет",
+      "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/763066661/original.jpg",
+      "observation_url": "https://www.inaturalist.org/observations/414497770",
+      "license_code": "cc0",
+      "attribution": "no rights reserved",
+      "illustration_boxes": [],
+      "asset": "examples/01-no-butterflies.jpg"
+    },
+    {
+      "photo_id": "763102252",
+      "title": "Другие насекомые",
+      "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/763102252/original.jpg",
+      "observation_url": "https://www.inaturalist.org/observations/414515115",
+      "license_code": "cc0",
+      "attribution": "no rights reserved",
+      "illustration_boxes": [],
+      "asset": "examples/02-other-insect.jpg"
+    },
+    {
+      "photo_id": "762723421",
+      "title": "Одна бабочка",
+      "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/762723421/original.jpg",
+      "observation_url": "https://www.inaturalist.org/observations/414327089",
+      "license_code": "cc0",
+      "attribution": "no rights reserved",
+      "illustration_boxes": [
+        {
+          "left": 0.068359,
+          "top": 0.206795,
+          "width": 0.832031,
+          "height": 0.711965
+        }
+      ],
+      "asset": "examples/03-single-butterfly.jpg"
+    },
+    {
+      "photo_id": "762445055",
+      "title": "Частичное перекрытие",
+      "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/762445055/original.jpg",
+      "observation_url": "https://www.inaturalist.org/observations/414191100",
+      "license_code": "cc0",
+      "attribution": "no rights reserved",
+      "illustration_boxes": [
+        {
+          "left": 0.041016,
+          "top": 0.155102,
+          "width": 0.859375,
+          "height": 0.62449
+        }
+      ],
+      "asset": "examples/04-occluded-butterfly.jpg"
+    },
+    {
+      "photo_id": "762517840",
+      "title": "Несколько бабочек",
+      "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/762517840/original.jpg",
+      "observation_url": "https://www.inaturalist.org/observations/414241574",
+      "license_code": "cc0",
+      "attribution": "no rights reserved",
+      "illustration_boxes": [
+        {
+          "left": 0.265625,
+          "top": 0.479167,
+          "width": 0.164062,
+          "height": 0.197917
+        },
+        {
+          "left": 0.295898,
+          "top": 0.427083,
+          "width": 0.18457,
+          "height": 0.247396
+        },
+        {
+          "left": 0.455078,
+          "top": 0.513021,
+          "width": 0.15625,
+          "height": 0.21224
+        },
+        {
+          "left": 0.678711,
+          "top": 0.411458,
+          "width": 0.076172,
+          "height": 0.165365
+        }
+      ],
+      "asset": "examples/05-multiple-butterflies.jpg"
+    }
+  ]
+}

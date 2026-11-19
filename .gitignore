@@ -238,3 +238,8 @@ images/
 # Environment variables
 .env
 .env.*
+
+# Review exports and task payloads contain worker IDs
+review/results/bbox_*/
+review/results/review_export_*/
+review/configs/exam.tasks.jsonl

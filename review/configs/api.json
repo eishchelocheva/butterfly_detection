@@ -1,0 +1,36 @@
+{
+  "api_token": "",
+  "deployment_key": "butterfly-review-2026-v1",
+  "public_name": "Проверьте разметку бабочек на фотографии",
+  "public_description": "Проверьте предложенные рамки и при необходимости исправьте разметку.",
+  "will_expire": "2026-12-01T00:00:00Z",
+  "assignment_max_duration_seconds": 1200,
+  "auto_accept_period_day": 7,
+  "admission_score": 90,
+  "training_admission_score": 90,
+  "training": {
+    "tasks_per_assignment": 5,
+    "reward_per_assignment": 3,
+    "overlap": 10
+  },
+  "exam": {
+    "tasks_per_assignment": 10,
+    "reward_per_assignment": 6,
+    "overlap": 10
+  },
+  "pilot": {
+    "tasks_per_assignment": 5,
+    "reward_per_assignment": 3,
+    "overlap": 2
+  },
+  "main": {
+    "tasks_per_assignment": 5,
+    "reward_per_assignment": 3,
+    "overlap": 1,
+    "fast_answers": {
+      "min_seconds": 20,
+      "count": 2,
+      "ban_days": 1
+    }
+  }
+}

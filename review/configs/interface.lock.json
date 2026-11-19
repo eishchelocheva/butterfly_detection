@@ -1,0 +1,20 @@
+{
+  "core": "1.0.0",
+  "action.bulk": "1.0.0",
+  "action.set": "1.0.0",
+  "condition.equals": "1.0.0",
+  "condition.not": "1.0.0",
+  "condition.schema": "1.0.0",
+  "field.image-annotation": "1.0.0",
+  "field.radio-group": "1.0.0",
+  "field.textarea": "1.0.0",
+  "helper.if": "1.0.0",
+  "layout.columns": "1.0.0",
+  "plugin.field.image-annotation.hotkeys": "1.0.0",
+  "plugin.hotkeys": "1.0.0",
+  "plugin.toloka": "1.0.0",
+  "plugin.trigger": "1.0.0",
+  "view.action-button": "1.0.0",
+  "view.list": "1.0.0",
+  "view.text": "1.0.0"
+}

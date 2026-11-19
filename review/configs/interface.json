@@ -1,0 +1,495 @@
+{
+  "view": {
+    "type": "view.list",
+    "size": "s",
+    "items": [
+      {
+        "type": "view.text",
+        "content": "Проверьте разметку фотографии. Каждая взрослая дневная или ночная бабочка должна быть обведена отдельной плотной прямоугольной рамкой. Включайте все видимые части: крылья, тело, усики и лапки. Скрытые части не достраивайте. Горячие клавиши: 1 — одобрить, 2 — отклонить и сделать свою разметку, 3 — спорный случай."
+      },
+      {
+        "type": "view.text",
+        "label": "Фото",
+        "content": {
+          "type": "data.input",
+          "path": "photo_id"
+        }
+      },
+      {
+        "type": "field.image-annotation",
+        "label": "Предложенная разметка",
+        "hint": "Сравните рамки с изображением. Этот блок предназначен только для просмотра.",
+        "image": {
+          "type": "data.input",
+          "path": "image_url"
+        },
+        "data": {
+          "type": "data.internal",
+          "path": "preview_boxes",
+          "default": {
+            "type": "data.input",
+            "path": "boxes"
+          }
+        },
+        "ratio": [
+          16,
+          9
+        ],
+        "shapes": {
+          "rectangle": true
+        },
+        "disabled": true
+      },
+      {
+        "type": "layout.columns",
+        "minWidth": 700,
+        "items": [
+          {
+            "type": "view.action-button",
+            "label": "Одобрить разметку [1]",
+            "hint": "Предложенные рамки попадут в ответ.",
+            "action": {
+              "type": "action.bulk",
+              "payload": [
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.internal",
+                    "path": "own_mode"
+                  },
+                  "payload": false
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "review_verdict"
+                  },
+                  "payload": "approve"
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "boxes"
+                  },
+                  "payload": {
+                    "type": "data.input",
+                    "path": "boxes"
+                  }
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "status"
+                  },
+                  "payload": null
+                }
+              ]
+            }
+          },
+          {
+            "type": "view.action-button",
+            "label": "Отклонить и сделать свою [2]",
+            "hint": "Редактор ниже очистится. Обведите бабочек заново.",
+            "action": {
+              "type": "action.bulk",
+              "payload": [
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.internal",
+                    "path": "own_mode"
+                  },
+                  "payload": false
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.internal",
+                    "path": "own_boxes"
+                  },
+                  "payload": []
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "boxes"
+                  },
+                  "payload": []
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "status"
+                  },
+                  "payload": null
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "review_verdict"
+                  },
+                  "payload": "reject"
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.internal",
+                    "path": "own_mode"
+                  },
+                  "payload": true
+                }
+              ]
+            }
+          },
+          {
+            "type": "view.action-button",
+            "label": "Спорный случай [3]",
+            "hint": "Опишите причину сомнений в комментарии.",
+            "action": {
+              "type": "action.bulk",
+              "payload": [
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.internal",
+                    "path": "own_mode"
+                  },
+                  "payload": false
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "review_verdict"
+                  },
+                  "payload": "uncertain"
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "boxes"
+                  },
+                  "payload": []
+                },
+                {
+                  "type": "action.set",
+                  "data": {
+                    "type": "data.output",
+                    "path": "status"
+                  },
+                  "payload": "uncertain"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "view.text",
+        "label": "Вердикт",
+        "content": {
+          "type": "helper.if",
+          "condition": {
+            "type": "condition.equals",
+            "data": {
+              "type": "data.output",
+              "path": "review_verdict"
+            },
+            "to": "approve"
+          },
+          "then": "Разметка одобрена",
+          "else": {
+            "type": "helper.if",
+            "condition": {
+              "type": "condition.equals",
+              "data": {
+                "type": "data.output",
+                "path": "review_verdict"
+              },
+              "to": "reject"
+            },
+            "then": "Разметка отклонена — нужна своя разметка",
+            "else": {
+              "type": "helper.if",
+              "condition": {
+                "type": "condition.equals",
+                "data": {
+                  "type": "data.output",
+                  "path": "review_verdict"
+                },
+                "to": "uncertain"
+              },
+              "then": "Спорный случай",
+              "else": "Вердикт ещё не выбран"
+            }
+          }
+        }
+      },
+      {
+        "type": "helper.if",
+        "condition": {
+          "type": "condition.equals",
+          "data": {
+            "type": "data.output",
+            "path": "review_verdict"
+          },
+          "to": "reject"
+        },
+        "then": {
+          "type": "field.image-annotation",
+          "label": "Своя разметка",
+          "hint": "Обведите каждую бабочку отдельной плотной прямоугольной рамкой. Повторное нажатие «Отклонить и сделать свою» очистит рамки. E — прямоугольник, Q — выбор рамки, A — подтвердить, S — отменить.",
+          "image": {
+            "type": "data.input",
+            "path": "image_url"
+          },
+          "data": {
+            "type": "data.internal",
+            "path": "own_boxes",
+            "default": []
+          },
+          "ratio": [
+            16,
+            9
+          ],
+          "shapes": {
+            "rectangle": true
+          }
+        }
+      },
+      {
+        "type": "helper.if",
+        "condition": {
+          "type": "condition.not",
+          "condition": {
+            "type": "condition.equals",
+            "data": {
+              "type": "data.output",
+              "path": "review_verdict"
+            },
+            "to": "uncertain"
+          }
+        },
+        "then": {
+          "type": "field.radio-group",
+          "label": "Результат осмотра",
+          "hint": "После одобрения или создания своей разметки укажите, есть ли на фото бабочки.",
+          "data": {
+            "type": "data.output",
+            "path": "status"
+          },
+          "options": [
+            {
+              "value": "objects",
+              "label": "Есть бабочки — все уверенно распознанные объекты обведены"
+            },
+            {
+              "value": "empty",
+              "label": "Бабочек нет — фото загрузилось и полностью осмотрено"
+            }
+          ]
+        }
+      },
+      {
+        "type": "field.textarea",
+        "label": "Комментарий",
+        "hint": "Для спорного случая комментарий обязателен. Опишите сомнение или расположение спорного объекта.",
+        "data": {
+          "type": "data.output",
+          "path": "comment",
+          "default": ""
+        },
+        "rows": 2
+      }
+    ],
+    "validation": {
+      "type": "condition.schema",
+      "data": {
+        "review_verdict": {
+          "type": "data.output",
+          "path": "review_verdict"
+        },
+        "status": {
+          "type": "data.output",
+          "path": "status"
+        },
+        "boxes": {
+          "type": "data.output",
+          "path": "boxes"
+        },
+        "comment": {
+          "type": "data.output",
+          "path": "comment"
+        }
+      },
+      "hint": "Выберите вердикт. Если бабочки есть, нужна хотя бы одна рамка; если бабочек нет, рамок быть не должно. Для спорного случая нужен комментарий.",
+      "schema": {
+        "type": "object",
+        "required": [
+          "review_verdict",
+          "status",
+          "boxes"
+        ],
+        "properties": {
+          "review_verdict": {
+            "type": "string",
+            "enum": [
+              "approve",
+              "reject",
+              "uncertain"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "objects",
+              "empty",
+              "uncertain"
+            ]
+          },
+          "boxes": {
+            "type": "array"
+          },
+          "comment": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "objects"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "boxes": {
+                  "minItems": 1
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "empty"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "boxes": {
+                  "maxItems": 0
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "review_verdict": {
+                  "const": "uncertain"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "comment"
+              ],
+              "properties": {
+                "status": {
+                  "const": "uncertain"
+                },
+                "boxes": {
+                  "maxItems": 0
+                },
+                "comment": {
+                  "type": "string",
+                  "pattern": "\\S"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "status": {
+                  "enum": [
+                    "objects",
+                    "empty"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "plugins": [
+    {
+      "type": "plugin.toloka",
+      "layout": {
+        "kind": "pager"
+      }
+    },
+    {
+      "type": "plugin.trigger",
+      "onChangeOf": {
+        "type": "data.internal",
+        "path": "own_boxes"
+      },
+      "condition": {
+        "type": "condition.equals",
+        "data": {
+          "type": "data.internal",
+          "path": "own_mode"
+        },
+        "to": true
+      },
+      "action": {
+        "type": "action.set",
+        "data": {
+          "type": "data.output",
+          "path": "boxes"
+        },
+        "payload": {
+          "type": "data.internal",
+          "path": "own_boxes"
+        }
+      }
+    },
+    {
+      "type": "plugin.field.image-annotation.hotkeys",
+      "modes": {
+        "select": "q",
+        "rectangle": "e"
+      },
+      "confirm": "a",
+      "cancel": "s"
+    },
+    {
+      "type": "plugin.hotkeys",
+      "1": {
+        "$ref": "view.items.3.items.0.action"
+      },
+      "2": {
+        "$ref": "view.items.3.items.1.action"
+      },
+      "3": {
+        "$ref": "view.items.3.items.2.action"
+      }
+    }
+  ]
+}
