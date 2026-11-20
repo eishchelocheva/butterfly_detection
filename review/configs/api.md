@@ -99,6 +99,28 @@ python3 review/tasks_api.py --config /path/to/local-config.json pools --project-
 
 `download-review` сохраняет все ответы `SUBMITTED` и `ACCEPTED` в `review_answers.jsonl`, включая входные и выходные значения, ID исполнителя, задания и страницы, пул и время. Выходной каталог должен быть новым: существующие результаты не перезаписываются.
 
+
+### Скачать результаты готовых заданий review по ID пула
+
+Из корня репозитория выполните в zsh:
+
+```bash
+read -r "REVIEW_POOL_ID?ID пула review: "
+read -rs "YANDEX_TASKS_TOKEN?OAuth-токен Яндекс Заданий: "
+echo
+
+python3 review/tasks_api.py \
+  --token "$YANDEX_TASKS_TOKEN" \
+  download-review \
+  --pool-id "$REVIEW_POOL_ID" \
+  --out review/results/review_export_01
+
+unset YANDEX_TASKS_TOKEN
+```
+
+Итоговые рамки и вердикт находятся в `output_values.boxes` и `output_values.review_verdict` каждой строки `review_answers.jsonl`. Для нескольких пулов повторите `--pool-id`; для повторной выгрузки выберите новый каталог. Выгрузка содержит ID исполнителей: не публикуйте её. Токен, переданный через `--token`, может быть виден другим процессам на компьютере.
+
+
 ## Формат проекта и ограничения
 
 Входы: `photo_id` (строка), `image_url` (URL), `boxes` (JSON). Выходы: `review_verdict` (`approve`, `reject`, `uncertain`), `status` (`objects`, `empty`, `uncertain`), `boxes` (JSON), `comment` (строка). Редактор, входные рамки и горячие клавиши проверяются в предпросмотре; действие ограничений следует проверять в настройках созданных заданий.

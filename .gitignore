@@ -243,3 +243,7 @@ images/
 review/results/bbox_*/
 review/results/review_export_*/
 review/configs/exam.tasks.jsonl
+
+# Raw review exports contain original worker IDs
+review/results/review_exam_export/
+review/results/review_main_export/
