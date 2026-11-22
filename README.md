@@ -252,31 +252,65 @@ Golden set используется как эталон при оценке мо
 butterfly_detection/
 ├── data_collection/
 │   ├── butterfly_dataset.ipynb
-│   └── butterfly_dataset_negative.ipynb
+│   └── butterfly_dataset_negative_2.ipynb
 │
 ├── data/
 │   ├── metadata_all_400.csv
 │   └── bbox_input_all_400.csv
 │
 ├── bbox/
+│   ├── create_project.py
+│   ├── tasks_api.py
+│   ├── tools.py
 │   ├── instructions/
+│   │   ├── annotator.html
+│   │   └── examples.json
 │   ├── configs/
+│   │   ├── api.json
+│   │   ├── api.md
+│   │   ├── exam.tsv
+│   │   └── interface.json
 │   ├── results/
+│   │   ├── bbox_summary.md
+│   │   ├── exam_assignments.tsv
+│   │   ├── pilot_assignments.tsv
+│   │   └── main_assignments.tsv
 │   └── README.md
 │
 ├── review/
+│   ├── create_project.py
+│   ├── tasks_api.py
 │   ├── instructions/
+│   │   ├── annotator.html
+│   │   └── examples.json
 │   ├── configs/
+│   │   ├── api.json
+│   │   ├── api.md
+│   │   ├── exam.tsv
+│   │   └── interface.json
 │   ├── results/
+│   │   ├── review_summary.md
+│   │   ├── exam_assignments.tsv
+│   │   ├── main_assignments.tsv
+│   │   └── anonymized/
 │   └── README.md
 │
 ├── golden_set/
+│   ├── golden_set.jsonl
+│   ├── README.md
 │   └── corrections/
+│       ├── corrections.csv
+│       ├── build_corrections.py
+│       └── README.md
 │
 ├── models/
-│   ├── grounding_dino/
-│   ├── owlv2/
-│   └── qwen3_vl/
+│   ├── models_final.ipynb
+│   ├── leaderboard.csv
+│   └── README_models.md
+│
+├── contest/
+│   ├── submission.jsonl
+│   └── README.md
 │
 ├── experiments/
 │   ├── configs/
@@ -286,13 +320,19 @@ butterfly_detection/
 │   ├── metrics/
 │   └── leaderboard/
 │
-├── contest/
 ├── presentation/
-│
 ├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
+
+В дереве показаны основные файлы проекта. Служебные файлы
+`.gitkeep` и отдельные дополнительные файлы конфигураций
+опущены для удобства чтения.
+
+Каталоги `experiments/`, `results/` и `presentation/`
+зарезервированы для дополнительных результатов
+экспериментов и материалов защиты.
 
 ## 9. Установка и запуск
 
